@@ -6,9 +6,11 @@ import pyodbc
 from flask import Flask
 from flask import render_template
 
-app = Flask(__name__)
+from NXSub2 import NXModuleZ
 
 logging.basicConfig(format='%(asctime)s:%(filename)s:%(levelname)s:%(message)s', filename='logs/NXHello.log', level=logging.DEBUG)
+
+app = Flask(__name__)
 
 class Foo():
 
@@ -47,3 +49,6 @@ def projects():
 @app.route('/about')
 def about():
     return 'The about page'
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port='5000', debug=True)
