@@ -15,10 +15,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import sys
+import os
+from pathlib import Path
 import logging
 import NXSettingsConfig 
 import argparse
+
+# Defining the root path to the modules search paths list 
+# This is required to be able to import modules that are outside of the current module path
+root_path = Path.cwd().parent
+sys.path.insert(0, os.path.join(root_path))
+logging.info(sys.path)
+
 from NXWebserver.NXWebserver import NXWebserver
+from NXTest.NXTest import NXTest
 
 class Application:
     def __init__(self, name):
@@ -31,7 +42,7 @@ class Application:
         return(self.args.command, self.args.target)
 
     def run(self, args):
-        print(f'Command: {args!r}')
+        logging.info(f'Command: {args!r}')
         if self.args.target == 'webserver':
             # logging.info('webserver')
             webserver = NXWebserver()
@@ -54,6 +65,7 @@ class CommandParser:
         
 
 if __name__ == '__main__':
+
     app = Application('NXHello')
     args = app.get_arguments()
     app.run(args)

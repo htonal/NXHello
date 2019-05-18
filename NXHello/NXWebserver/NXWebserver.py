@@ -14,11 +14,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import sys
+import os
+from pathlib import Path
 import logging
 import NXSettingsConfig 
 from flask import Flask, Blueprint
 from flask import redirect, url_for
 # from flask_appbuilder import AppBuilder, SQLA
+
+from NXTest.NXTest import NXTest
 
 routes = Blueprint('routes', __name__)
 
@@ -30,6 +35,8 @@ def index():
 class NXWebserver:
 
     def __init__(self):
+        
+        
         self.app = Flask(__name__)
         self.app.register_blueprint(routes)
     
